@@ -26,6 +26,7 @@
 		D7A719811C376B7E001DD470 /* PocketCoreImageAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A719801C376B7E001DD470 /* PocketCoreImageAppDelegate.swift */; };
 		D7A719831C376CD5001DD470 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A719821C376CD5001DD470 /* Default-568h@2x.png */; };
 		D7A719861C376D37001DD470 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7A719841C376D37001DD470 /* LaunchScreen.storyboard */; };
+		D7DDE9E01C376FB400C815F3 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D7DDE9DF1C376FB400C815F3 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +52,7 @@
 		D7A719801C376B7E001DD470 /* PocketCoreImageAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PocketCoreImageAppDelegate.swift; sourceTree = "<group>"; };
 		D7A719821C376CD5001DD470 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		D7A719851C376D37001DD470 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D7DDE9DE1C376EA500C815F3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D7DDE9DF1C376FB400C815F3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +73,8 @@
 		D0420C0B13D4B69500B69459 = {
 			isa = PBXGroup;
 			children = (
+				D7DDE9DF1C376FB400C815F3 /* README.md */,
 				D0CF503C13FEFECF00DBC7D8 /* ReadMe.txt */,
-				D7DDE9DE1C376EA500C815F3 /* README.md */,
 				D0420C2013D4B69500B69459 /* PocketCoreImage */,
 				D0420C1913D4B69500B69459 /* Frameworks */,
 				D0420C1713D4B69500B69459 /* Products */,
@@ -213,6 +214,7 @@
 			files = (
 				D7A719811C376B7E001DD470 /* PocketCoreImageAppDelegate.swift in Sources */,
 				D7A7197D1C375C79001DD470 /* FilterDetailCategory.swift in Sources */,
+				D7DDE9E01C376FB400C815F3 /* README.md in Sources */,
 				D7A7197B1C375822001DD470 /* FilteredImageView.swift in Sources */,
 				D7A7197F1C375CA5001DD470 /* MainViewController.swift in Sources */,
 			);
