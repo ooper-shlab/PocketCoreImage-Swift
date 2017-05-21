@@ -26,7 +26,6 @@
 		D7A719811C376B7E001DD470 /* PocketCoreImageAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A719801C376B7E001DD470 /* PocketCoreImageAppDelegate.swift */; };
 		D7A719831C376CD5001DD470 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A719821C376CD5001DD470 /* Default-568h@2x.png */; };
 		D7A719861C376D37001DD470 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7A719841C376D37001DD470 /* LaunchScreen.storyboard */; };
-		D7DDE9E01C376FB400C815F3 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D7DDE9DF1C376FB400C815F3 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -168,6 +167,11 @@
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Apple, Inc";
+				TargetAttributes = {
+					D0420C1513D4B69500B69459 = {
+						LastSwiftMigration = 0830;
+					};
+				};
 			};
 			buildConfigurationList = D0420C1013D4B69500B69459 /* Build configuration list for PBXProject "PocketCoreImage" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -214,7 +218,6 @@
 			files = (
 				D7A719811C376B7E001DD470 /* PocketCoreImageAppDelegate.swift in Sources */,
 				D7A7197D1C375C79001DD470 /* FilterDetailCategory.swift in Sources */,
-				D7DDE9E01C376FB400C815F3 /* README.md in Sources */,
 				D7A7197B1C375822001DD470 /* FilteredImageView.swift in Sources */,
 				D7A7197F1C375CA5001DD470 /* MainViewController.swift in Sources */,
 			);
@@ -332,6 +335,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -346,6 +350,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

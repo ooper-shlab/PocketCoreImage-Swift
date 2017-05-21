@@ -62,7 +62,7 @@ extension MainViewController {
     // Helper method.
     // Returns an NSDictionary containg only the parameters we want our configure method
     // to operate on.
-    static func deriveEditableAttributesForFilter(filter: CIFilter) -> [String: AnyObject] {
+    static func deriveEditableAttributesForFilter(_ filter: CIFilter) -> [String: AnyObject] {
         var editableAttributes: [String: AnyObject] = [:]
         let filterAttributes = filter.attributes
         
@@ -71,9 +71,9 @@ extension MainViewController {
             else if key == "CIAttributeFilterDisplayName" {continue}
             else if key == "inputImage" {continue}
             else if key == "outputImage" {continue}
-            else if !(attribute is [NSObject: AnyObject]) {continue}
+            else if !(attribute is [AnyHashable: Any]) {continue}
             
-            editableAttributes[key] = attribute
+            editableAttributes[key] = attribute as AnyObject
         }
         
         return editableAttributes
@@ -81,14 +81,13 @@ extension MainViewController {
     
     //
     // Helper function that returns a random float value within the specified range.
-    static func randFloat(a: Float, _ b: Float) -> Float {
-        srand(UInt32(truncatingBitPattern: time(nil)))
-        return ((b-a)*(Float(arc4random())/Float(RAND_MAX)))+a;
+    static func randFloat(_ a: Float, _ b: Float) -> Float {
+        return ((b-a)*(Float(arc4random())/Float(UInt32.max)))+a;
     }
     
     //
     // Given a filter, examine all its parameters and configure them with randomly generated values.
-    static func configureFilter(filter: CIFilter) {
+    static func configureFilter(_ filter: CIFilter) {
         // Get the filter's parameters we're interested in configuring here.
         let editableAttributes = MainViewController.deriveEditableAttributesForFilter(filter)
         
@@ -102,7 +101,7 @@ extension MainViewController {
                 // can group them into types that require either a boolean, float, or integer.
                 let attributeType = attributeDictionary[kCIAttributeType] as? String
                 if attributeType == kCIAttributeTypeBoolean {
-                    let randomValue = Int(rand() % 2)
+                    let randomValue = Int(arc4random() % 2)
                     
                     NSLog("Setting %i for key %@ of type BOOL", randomValue, key)
                     filter.setValue(randomValue, forKey: key)
@@ -123,7 +122,7 @@ extension MainViewController {
                     let maximumValue = attributeDictionary[kCIAttributeMax] as! Int
                     let minimumValue = attributeDictionary[kCIAttributeMin] as! Int
                     
-                    let randomValue = (Int(rand()) % (maximumValue - minimumValue)) + minimumValue
+                    let randomValue = (Int(arc4random()) % (maximumValue - minimumValue)) + minimumValue
                     
                     NSLog("Setting %i for key %@ of type Integer", randomValue, key)
                     filter.setValue(randomValue, forKey: key)

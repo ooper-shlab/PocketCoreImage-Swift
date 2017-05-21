@@ -78,8 +78,6 @@ class FilteredImageView: UIView {
     //
     // Requests the list of filters from the data source and applies each filter
     // in order to the _inputImage.
-    //- (void)reloadData
-    //{
     func reloadData() {
         guard let inputImage = inputImage else {
             return
@@ -88,7 +86,7 @@ class FilteredImageView: UIView {
         // Create a CIImage from the _inputImage.  While UIImage has a property returning
         // a CIImage representation of it, there are cases where it will not work.  This is the
         // most compatible route.
-        _filteredImage = CIImage(CGImage: inputImage.CGImage!, options: nil)
+        _filteredImage = CIImage(cgImage: inputImage.cgImage!, options: nil)
         
         // Retrieve the list of CIFilters to apply from our datasource.
         let filters = self.datasource.filtersToApply
@@ -100,6 +98,7 @@ class FilteredImageView: UIView {
             // in the configuration method.  For example, CIColorCube requires its parameter to be a power
             // of 2.  In such as case, the filter will throw an exception when we ask it generate and image.
             // Catch the exception and pretend nothing happened thereby bypassing the filter.
+            //### `NSException` cannot be handled properly in ARC environment. Be careful not to raise exceptions.
             //            @try {
             _filteredImage = filter.outputImage
             //            @catch (NSException* e) { }
@@ -109,8 +108,8 @@ class FilteredImageView: UIView {
         self.setNeedsDisplay()
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         guard let _filteredImage = _filteredImage else {
             return
@@ -118,15 +117,15 @@ class FilteredImageView: UIView {
         
         // This is the rect we'll draw our final image into.  By making it a bit smaller than our bounds
         // we'll get a nice border.
-        let innerBounds = CGRectMake(5, 5, self.bounds.size.width - 10, self.bounds.size.height - 10)
+        let innerBounds = CGRect(x: 5, y: 5, width: self.bounds.size.width - 10, height: self.bounds.size.height - 10)
         
         // To display the image, convert it back to a UIImage and draw it in our rect.  UIImage takes
         // into account the orientation of an image when drawing which we would have needed to worry about
         // when drawing it directly with Core Image and Core Graphics calls.
-        UIImage(CIImage: _filteredImage).drawInRect(innerBounds)
+        UIImage(ciImage: _filteredImage).draw(in: innerBounds)
     }
     
-    private func didSetInputImage(inputImage: UIImage?) {
+    private func didSetInputImage(_ inputImage: UIImage?) {
         // Since Core Image filters must be operate on every pixel in an image, you may want to
         // consider resizing an input image to the view size before applying any filters.
         //

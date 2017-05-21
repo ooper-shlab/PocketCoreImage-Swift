@@ -84,7 +84,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate, UITa
     // Creates a new instance of the named filter and adds
     // it to the list of filters to be applied, then
     // updates the display.
-    private func addFilter(name: String) {
+    private func addFilter(_ name: String) {
         // Create a new filter with the given name.
         guard let newFilter = CIFilter(name: name) else {
             // A nil value implies the filter is not available.
@@ -107,12 +107,12 @@ class MainViewController: UIViewController, UINavigationControllerDelegate, UITa
     //
     // Private method to add a filter given it's name.
     // Updates the display when finished.
-    private func removeFilter(name: String) {
+    private func removeFilter(_ name: String) {
         
         // Find the index named filter in the array.
-        if let filterIndex = filtersToApply.indexOf({$0.name == name}) {
+        if let filterIndex = filtersToApply.index(where: {$0.name == name}) {
             // If it was found (which it always should be) remove it.
-            filtersToApply.removeAtIndex(filterIndex)
+            filtersToApply.remove(at: filterIndex)
         }
         
         // Instruct the filtered image view to refresh
@@ -128,55 +128,55 @@ class MainViewController: UIViewController, UINavigationControllerDelegate, UITa
     // is created on demand when the user chooses to add it to the list of applied filters.
     //
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _availableFilters.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let filterCellID = "filterCell"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(filterCellID)
+        var cell = tableView.dequeueReusableCell(withIdentifier: filterCellID)
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: filterCellID)
+            cell = UITableViewCell(style: .default, reuseIdentifier: filterCellID)
         }
         
         cell!.textLabel!.text = _availableFilters[indexPath.row]
         
         // Check if the filter named in this row is currently applied to the image.  If it is,
         // give this row a checkmark.
-        cell!.accessoryType = .None
-        if filtersToApply.indexOf({$0.name == _availableFilters[indexPath.row]}) != nil {
-            cell!.accessoryType = .Checkmark
+        cell!.accessoryType = .none
+        if filtersToApply.index(where: {$0.name == _availableFilters[indexPath.row]}) != nil {
+            cell!.accessoryType = .checkmark
         }
         
         return cell!
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Select a Filter"
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell = tableView.cellForRow(at: indexPath)
         
         // Determine if the filter is or is not currently applied.
-        let filterIsCurrentlyApplied = filtersToApply.indexOf({$0.name == selectedCell?.textLabel?.text}) != nil
+        let filterIsCurrentlyApplied = filtersToApply.index(where: {$0.name == selectedCell?.textLabel?.text}) != nil
         
         // If the filter is currently being applied, remove it.
         if filterIsCurrentlyApplied {
             self.removeFilter(_availableFilters[indexPath.row])
-            tableView.cellForRowAtIndexPath(indexPath)!.accessoryType = .None
+            tableView.cellForRow(at: indexPath)!.accessoryType = .none
             // Otherwise, add it.
         } else {
             self.addFilter(_availableFilters[indexPath.row])
-            tableView.cellForRowAtIndexPath(indexPath)!.accessoryType = .Checkmark;
+            tableView.cellForRow(at: indexPath)!.accessoryType = .checkmark;
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //MARK: - View lifecycle
