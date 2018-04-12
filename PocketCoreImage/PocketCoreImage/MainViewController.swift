@@ -57,7 +57,7 @@ import UIKit
 import QuartzCore
 
 @objc(MainViewController)
-class MainViewController: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+class MainViewController: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, FilteredViewDatasource {
     // Array of CIFilters currently applied to the image.
     var filtersToApply: [CIFilter] = []
     // Array created at startup containg the names of filters that can be applied to the image.
@@ -69,7 +69,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate, UITa
     //
     // Action sent by the right navigation bar item.
     // Removes all applied filters and updates the display.
-    @IBAction func clearFilters(_: AnyObject) {
+    @IBAction func clearFilters(_: Any) {
         filtersToApply.removeAll()
         
         // Instruct the filtered image view to refresh

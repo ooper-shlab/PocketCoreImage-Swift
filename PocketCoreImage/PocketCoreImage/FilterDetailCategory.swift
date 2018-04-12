@@ -62,8 +62,8 @@ extension MainViewController {
     // Helper method.
     // Returns an NSDictionary containg only the parameters we want our configure method
     // to operate on.
-    static func deriveEditableAttributesForFilter(_ filter: CIFilter) -> [String: AnyObject] {
-        var editableAttributes: [String: AnyObject] = [:]
+    static func deriveEditableAttributesForFilter(_ filter: CIFilter) -> [String: Any] {
+        var editableAttributes: [String: Any] = [:]
         let filterAttributes = filter.attributes
         
         for (key, attribute) in filterAttributes {
@@ -73,7 +73,7 @@ extension MainViewController {
             else if key == "outputImage" {continue}
             else if !(attribute is [AnyHashable: Any]) {continue}
             
-            editableAttributes[key] = attribute as AnyObject
+            editableAttributes[key] = attribute
         }
         
         return editableAttributes
@@ -91,7 +91,7 @@ extension MainViewController {
         // Get the filter's parameters we're interested in configuring here.
         let editableAttributes = MainViewController.deriveEditableAttributesForFilter(filter)
         
-        for (key, attributeDictionary) in editableAttributes as! [String: [String: AnyObject]] {
+        for (key, attributeDictionary) in editableAttributes as! [String: [String: Any]] {
             
             // Our method here only supports generating random values for parameters that expect numbers.
             // Some paramters take an image, color, or vector.
@@ -110,8 +110,8 @@ extension MainViewController {
                     attributeType == kCIAttributeTypeAngle
                 {
                     // Get the min and max values
-                    let maximumValue = attributeDictionary[kCIAttributeSliderMax] as! Float
-                    let minimumValue = attributeDictionary[kCIAttributeSliderMin] as! Float
+                    let maximumValue = (attributeDictionary[kCIAttributeSliderMax] as! NSNumber).floatValue
+                    let minimumValue = (attributeDictionary[kCIAttributeSliderMin] as! NSNumber).floatValue
                     
                     let randomValue = randFloat(minimumValue, maximumValue)
                     
